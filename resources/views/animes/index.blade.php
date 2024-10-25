@@ -5,6 +5,10 @@
         </h2>
     </x-slot>
 
+    <x-alert-success>
+        {{session('success')}}
+    </x-alert-success>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -12,12 +16,14 @@
                     <h3 class="font-semibold text-lg mb-4">Anime List</h3>
                     <div class="grid grid-cols1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         @foreach($animes as $anime)
+                        <a href="{{route('animes.show',$anime)}}">
                             <x-anime-card
                             :title="$anime->title"
                             :numberOfEp="$anime->numberOfEp"
                             :image="$anime->image"
                             :description="$anime->description"
                             />
+                        </a>
                         @endforeach
                     </div>
                 </div>

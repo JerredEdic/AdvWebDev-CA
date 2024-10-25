@@ -13,6 +13,8 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/animes',[AnimeController::class,'index'])->name('animes.index');
+Route::get('/animes/create',[AnimeController::class,'create'])->name('animes.create');
+Route::get('/animes/{anime}',[AnimeController::class,'show'])->name('animes.show');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
