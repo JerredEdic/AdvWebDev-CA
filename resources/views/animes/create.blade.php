@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg mb-4">Add a New Anime</h3>
-                    <x-anime-details
+                    <x-anime-form
                     :action="route('animes.store')"
                     :method="'POST'"
                     />

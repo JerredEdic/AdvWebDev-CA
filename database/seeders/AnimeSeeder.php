@@ -16,7 +16,8 @@ class AnimeSeeder extends Seeder
     {
         $currentTimeStamp = Carbon::now();
         Anime::insert([
-            ['title' => 'Bleach','description'=> 'A world where shinigami fight dangerous creatures called hollows','image'=> '','numberOfEp' => 386, 'created_at' => $currentTimeStamp, 'updated_at'=> $currentTimeStamp]
+            ['title' => 'Bleach','description'=> 'A world where shinigami fight dangerous creatures called hollows','image'=> '','numberOfEp' => 386, 'created_at' => $currentTimeStamp, 'updated_at'=> $currentTimeStamp],
+            ['title' => 'One Piece','description'=> 'Follow the story that crosses the seas to fine the greatest treasure','image'=> '','numberOfEp' => 1136, 'created_at' => $currentTimeStamp, 'updated_at'=> $currentTimeStamp]
         ]);
     }
 }

@@ -22,7 +22,7 @@ class AnimeController extends Controller
      */
     public function create()
     {
-        return view("anime.create");
+        return view("animes.create");
     }
 
     /**
@@ -34,21 +34,21 @@ class AnimeController extends Controller
         // Validate input 
         $request->validate([
             'title' => 'required',
-            'description' => 'required|max: 500',
+            'description' => 'required|max:500',
             'numberOfEp' => 'required|integer',
-            'image' => 'required|image|mimes: jpeg, png, jpg, gif|max: 2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
         // Check if the image is uploaded and handle it
         if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move (public_path('images'), $imageName);
         }
-        $imageName = time().'.'.$request->image->extension();
-        $request->image->move (public_path('images/animes'), $imageName);
         // Create a anime record in the database
         Anime::create([
         'title' => $request->title,
         'description' => $request->description, // Fixed typo from 'descriptn' 
         'numberOfEp' => $request->numberOfEp,
-        'image' => $imageName, // Store the image URL in the DB
+        'image' => 'images/'.$imageName, // Store the image URL in the DB
         'created_at' => now(),
         'updated_at' => now()
         ]);
