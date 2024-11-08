@@ -41,19 +41,19 @@ class AnimeController extends Controller
         // Check if the image is uploaded and handle it
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();
-            $request->image->move (public_path('images'), $imageName);
+            $request->image->move(public_path('images'), $imageName);
         }
         // Create a anime record in the database
         Anime::create([
         'title' => $request->title,
         'description' => $request->description, // Fixed typo from 'descriptn' 
         'numberOfEp' => $request->numberOfEp,
-        'image' => 'images/'.$imageName, // Store the image URL in the DB
+        'image' => "'images/'.$imageName", // Store the image URL in the DB
         'created_at' => now(),
         'updated_at' => now()
         ]);
         // Redirect to the index page with a success message
-        return_to_route('animes.index')->with('success', 'Anime created successfully!');
+        return to_route('animes.index')->with('success', 'Anime created successfully!');
     }
 
     /**

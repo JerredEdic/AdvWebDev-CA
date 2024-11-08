@@ -14,8 +14,8 @@ Route::get('/dashboard', function () {
 
 Route::get('/animes',[AnimeController::class,'index'])->name('animes.index');
 Route::get('/animes/create',[AnimeController::class,'create'])->name('animes.create');
-Route::post('/animes/store',[AnimeController::class,'store'])->name('animes.store');
 Route::get('/animes/{anime}',[AnimeController::class,'show'])->name('animes.show');
+Route::post('/animes',[AnimeController::class,'store'])->name('animes.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
