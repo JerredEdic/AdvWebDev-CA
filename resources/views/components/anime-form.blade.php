@@ -1,4 +1,4 @@
-@props(['action', 'method'])
+@props(['action', 'method','anime'])
 
 <form action="{{ $action }}" method="POST" enctype="multipart/form-data">
     @csrf
@@ -22,14 +22,14 @@ class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
 
 
 <div class="mb-4">
-    <label for="numberOfEP" class="block text-sm text-gray-700">Number Of Episodes</label>
+    <label for="numberOfEp" class="block text-sm text-gray-700">Number Of Episodes</label>
 <input
 type="text"
-name="numberOfEP" id="numberOfEP"
-value="{{ old('numberOfEP', $anime->numberOfEP ?? '') }}"
+name="numberOfEp" id="numberOfEp"
+value="{{ old('numberOfEp', $anime->numberOfEp ?? '') }}"
 required
 class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" /> 
-@error('numberOfEP')
+@error('numberOfEp')
 <p class="text-sm text-red-600">{{ $message }}</p>
 @enderror
 </div>
@@ -49,18 +49,14 @@ class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
 
 <div class="mb-4">
 <label for="image" class="block text-sm font-medium text-gray-700">Anime Cover Image</label>
-<input type="file" name="image" id="image" 
-{{ isset($anime) ? '' : 'required' }}
-class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo- 500 focus:border-indigo-500"
-/>
+<input type="file" name="image" id="image" {{ isset($anime) ? '' : 'required' }} class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo- 500 focus:border-indigo-500"/>
 @error('image')
 <p class="text-sm text-red-600">{{ $message }}</p>
 @enderror
 </div>
 @isset($anime->image)
 <div class="mb-4">
-<img src="{{ asset($anime->image) }}" alt="Anime cover" class="w-24 h-32 object-
-cover">
+<img src="{{ asset($anime->image) }}" alt="Anime cover" class="w-24 h-32 object-cover">
 </div> @endisset
 
 <div>

@@ -30,14 +30,18 @@ class AnimeController extends Controller
      */
     public function store(Request $request)
     {
+        //Use dd() to trouble shoot
+
         
         // Validate input 
         $request->validate([
-            'title' => 'required',
-            'description' => 'required|max:500',
-            'numberOfEp' => 'required|integer',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'title'=>'required|string|max:255',
+            'description'=>'required|string|max:500',
+            'numberOfEp'=>'required|integer',
+            'image'=>'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
+
+  
         // Check if the image is uploaded and handle it
         if ($request->hasFile('image')) {
             $imageName = time().'.'.$request->image->extension();
@@ -45,12 +49,12 @@ class AnimeController extends Controller
         }
         // Create a anime record in the database
         Anime::create([
-        'title' => $request->title,
-        'description' => $request->description, // Fixed typo from 'descriptn' 
-        'numberOfEp' => $request->numberOfEp,
-        'image' => "'images/'.$imageName", // Store the image URL in the DB
-        'created_at' => now(),
-        'updated_at' => now()
+        'title'=>$request->title,
+        'description'=>$request->description, // Fixed typo from 'descriptn' 
+        'numberOfEp'=>$request->numberOfEp,
+        'image'=>'images/'.$imageName, // Store the image URL in the DB
+        'created_at'=>now(),
+        'updated_at'=>now()
         ]);
         // Redirect to the index page with a success message
         return to_route('animes.index')->with('success', 'Anime created successfully!');
@@ -69,7 +73,7 @@ class AnimeController extends Controller
      */
     public function edit(Anime $anime)
     {
-        //
+        return view("animes.edit", compact('anime'));
     }
 
     /**
@@ -77,7 +81,31 @@ class AnimeController extends Controller
      */
     public function update(Request $request, Anime $anime)
     {
-        //
+        // Validate input 
+        $request->validate([
+            'title'=>'required|string|max:255',
+            'description'=>'required|string|max:500',
+            'numberOfEp'=>'required|integer',
+            'image'=>'image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+  
+        // Check if the image is uploaded and handle it
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+
+            $anime->update(['image'=>'images/'.$imageName]);// updates the image URL in the DB
+        }
+        // Update a anime record in the database
+        $anime->update([
+        'title'=>$request->title,
+        'description'=>$request->description, // Fixed typo from 'descriptn' 
+        'numberOfEp'=>$request->numberOfEp,
+        'updated_at'=>now()
+        ]);
+        // Redirect to the index page with a success message
+        return to_route('animes.index')->with('success', 'Anime edited successfully!');
     }
 
     /**
@@ -85,6 +113,9 @@ class AnimeController extends Controller
      */
     public function destroy(Anime $anime)
     {
-        //
+      
+        $anime->delete();
+ 
+        return to_route('animes.index')->with('success', 'Anime deleted successfully!');
     }
 }
