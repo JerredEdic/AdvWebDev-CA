@@ -9,6 +9,10 @@
         {{session('success')}}
     </x-alert-success>
 
+    <x-alert-error>
+        {{session('error')}}
+    </x-alert-error>
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
@@ -25,7 +29,7 @@
                                 :description="$anime->description"
                                 />
                             </a>
-
+                            @if(auth()->user()->role === 'admin')
                             <div class="mt-4 flex space-x-2">
                             <a href="{{ route('animes.edit', $anime) }}" class="text-gray-600 bg-orange-300 hover:bg-orange-700 font-bold py-2 px-4 rounded">Edit</a>
 
@@ -35,6 +39,7 @@
                                 <button type="submit" class="bg-red-500 hover:bg-red-700 text-gray-600 font-bold py-2 px-4 rounded">Delete</button>
                             </form>
                             </div>
+                            @endif
                         </div>
                         @endforeach
                     </div>

@@ -22,6 +22,9 @@ class AnimeController extends Controller
      */
     public function create()
     {
+        if (auth()->user()->role !== 'admin'){
+            return redirect()->route('animes.index')->with('error', 'Access denied');
+        }
         return view("animes.create");
     }
 
@@ -73,6 +76,9 @@ class AnimeController extends Controller
      */
     public function edit(Anime $anime)
     {
+        if (auth()->user()->role !== 'admin'){
+            return redirect()->route('animes.index')->with('error', 'Access denied');
+        }
         return view("animes.edit", compact('anime'));
     }
 
@@ -113,7 +119,11 @@ class AnimeController extends Controller
      */
     public function destroy(Anime $anime)
     {
-      
+        if (auth()->user()->role !== 'admin'){
+            return redirect()->route('animes.index')->with('error', 'Access denied');
+        }
+        
+        unlink(public_path($anime->image));
         $anime->delete();
  
         return to_route('animes.index')->with('success', 'Anime deleted successfully!');

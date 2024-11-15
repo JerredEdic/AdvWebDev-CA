@@ -18,9 +18,12 @@
                     <x-nav-link :href="route('animes.index')" :active="request()->routeIs('animes.index')">
                         {{ __('View Animes') }}
                     </x-nav-link>
+
+                    @if(auth()->user()->role === 'admin')
                     <x-nav-link :href="route('animes.create')" :active="request()->routeIs('animes.create')">
                         {{ __('Add Anime') }}
                     </x-nav-link>
+                    @endif
                 </div>
                 
             </div>
