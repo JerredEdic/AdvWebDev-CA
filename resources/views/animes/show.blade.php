@@ -16,6 +16,21 @@
                             :image="$anime->image"
                             :description="$anime->description"
                             />
+
+                            <h4 class='font-semibold text-md mt-8'>Reviews</h4>
+                            @if($anime-reviews-isEmpty())
+                            <p class="text-gray-600">No Reviews Yet.</p>
+                            @else
+                            <ul class='mt-4 space-y-4'>
+                                @foreach($anime-reviews as $review)
+                                    <li class="bg-gray-100 p-4 rounded-lg">
+                                        <p class="font-semibold">{{$review->user->name}} ({{$review->created_at->format('M d, Y')}})</p>
+                                        <p>Rating:{{$review->rating}}</p>
+                                        <p>{{$review->comment}}</p>
+                                    </li>
+                                @endforeach
+                            </ul>
+                            @endif
                     </div>
                 </div>
             </div>

@@ -68,7 +68,8 @@ class AnimeController extends Controller
      */
     public function show(Anime $anime)
     {
-        return view('animes.show')->with('anime',$anime);
+        $anime->load('reviews.user');
+        return view('animes.show',compact('anime'));
     }
 
     /**

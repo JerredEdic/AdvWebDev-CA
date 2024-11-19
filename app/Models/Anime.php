@@ -18,4 +18,9 @@ class Anime extends Model
         'created_at',
         'update_at'
     ];
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
 }
