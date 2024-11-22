@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AnimeController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -32,6 +33,6 @@ Route::middleware('auth')->group(function () {
 
 Route::resource('reviews',ReviewController::class);
 
-Route::post('anime/{anime}/reviews',[ReviewController::class,'store'])->name('reviews.store');
+Route::post('animes/{anime}/reviews',[ReviewController::class,'store'])->name('reviews.store');
 
 require __DIR__.'/auth.php';

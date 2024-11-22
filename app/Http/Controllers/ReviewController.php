@@ -28,6 +28,7 @@ class ReviewController extends Controller
      */
     public function store(Request $request, Anime $anime)
     {
+        dd($anime);
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
             'comment' => 'nullable|string|max1000'
@@ -40,7 +41,7 @@ class ReviewController extends Controller
             'anime_id' => $anime->id
         ]);
 
-        return redirect()->route('animmes.show',$anime)->with('success','Review Posted');
+        return redirect()->route('animes.show',$anime)->with('success','Review Posted');
     }
 
     /**
