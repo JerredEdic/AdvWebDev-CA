@@ -57,7 +57,11 @@ class ReviewController extends Controller
      */
     public function edit(Review $review)
     {
-        //
+        if(auth()->user()->role !== 'admin' && auth()->user()->id!==$review->user_id){
+            return redirect()->route('animes.index')->with('error', 'Access denied');
+        }
+
+        return view("reviews.edit",compact('review'));
     }
 
     /**

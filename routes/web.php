@@ -34,5 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::resource('reviews',ReviewController::class);
 
 Route::post('animes/{anime}/reviews',[ReviewController::class,'store'])->name('reviews.store');
+Route::get('review/{review}/edit',[ReviewController::class,'edit'])->name('reviews.edit');
+
 
 require __DIR__.'/auth.php';
