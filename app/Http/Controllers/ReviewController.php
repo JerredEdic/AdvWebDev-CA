@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Review;
+use App\Models\Anime;
 use Illuminate\Http\Request;
 
 class ReviewController extends Controller
@@ -28,15 +29,14 @@ class ReviewController extends Controller
      */
     public function store(Request $request, Anime $anime)
     {
-        dd($anime);
         $request->validate([
             'rating' => 'required|integer|min:1|max:5',
-            'comment' => 'nullable|string|max1000'
+            'comment' => 'nullable|string|max:1000'
         ]);
 
         $anime->reviews()->create([
             'user_id' => auth()->id(),
-            'rating' =>$request->input('comment'),
+            'rating' =>$request->input('rating'),
             'comment' => $request->input('comment'),
             'anime_id' => $anime->id
         ]);
