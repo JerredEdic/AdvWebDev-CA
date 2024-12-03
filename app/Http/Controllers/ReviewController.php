@@ -69,7 +69,19 @@ class ReviewController extends Controller
      */
     public function update(Request $request, Review $review)
     {
-        //
+        // Validate input 
+        $request->validate([
+            'rating' => 'required|integer|min:1|max:5',
+            'comment' => 'nullable|string|max:1000'
+        ]);
+
+        // Update a anime record in the database
+        $review->update([
+            'rating' =>$request->input('rating'),
+            'comment' => $request->input('comment')
+        ]);
+        // Redirect to the index page with a success message
+        return to_route('animes.show',compact('anime'))->with('success', 'review successfully edited!');
     }
 
     /**
