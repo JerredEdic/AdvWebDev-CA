@@ -11,7 +11,7 @@
     <label for="rating" class="block font-medium text-sm text-gray-700">Rating</label>
     <select name="rating" value="{{ old('rating', $review->rating ?? '') }}" id="rating" class="mt-1 block w-full" required>
         @for($k=1;$k< 6;$k++)  
-            <option value="$k" {{ ($k === $review->rating) ? 'selected' : '' }}>{{$k}}</option>
+            <option value="{{$k}}" {{ ($k === $review->rating) ? 'selected' : '' }}>{{$k}}</option>
         @endfor
     </select>
 </div>
@@ -35,5 +35,5 @@ class="mt-1 block w-full border-gray-300 rounded-md shadow-sm" />
 
 <div>
 <x-primary-button>
-{{ isset($anime) ? 'Update Anime' : 'Add Anime' }} </x-primary-button>
+{{ isset($anime) ? 'Update review' : 'Add review' }} </x-primary-button>
 </div> </form>

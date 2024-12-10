@@ -35,7 +35,7 @@ Route::resource('reviews',ReviewController::class);
 
 Route::post('animes/{anime}/reviews',[ReviewController::class,'store'])->name('reviews.store');
 Route::get('review/{review}/edit',[ReviewController::class,'edit'])->name('reviews.edit');
-Route::patch('/reviews/{review}',[AnimeController::class,'update'])->name('reviews.update');
-
+Route::patch('/reviews/{review}',[ReviewController::class,'update'])->name('reviews.update');
+Route::delete('/reviews/{review}',[ReviewController::class,'destroy'])->name('reviews.destroy');
 
 require __DIR__.'/auth.php';

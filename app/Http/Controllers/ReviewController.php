@@ -81,7 +81,7 @@ class ReviewController extends Controller
             'comment' => $request->input('comment')
         ]);
         // Redirect to the index page with a success message
-        return to_route('animes.show',compact('anime'))->with('success', 'review successfully edited!');
+        return to_route('animes.index')->with('success', 'review successfully edited!');
     }
 
     /**
@@ -89,6 +89,12 @@ class ReviewController extends Controller
      */
     public function destroy(Review $review)
     {
-        //
+        if (auth()->user()->role !== 'admin' && auth()->user()->id !== $review->user_id){
+            return redirect()->route('animes.index')->with('error', 'Access denied');
+        }
+
+        $review->delete();
+ 
+        return to_route('animes.index')->with('success', 'Review deleted successfully!');
     }
 }
